@@ -8,7 +8,7 @@
 import UIKit
 
 final class ResultViewController: UIViewController {
-    
+
     @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var describeLabel: UILabel!
     
@@ -26,9 +26,15 @@ final class ResultViewController: UIViewController {
     }
     
     private func mostFrequentAnimal() -> Animal? {
-        answers.reduce(into: [Animal: Int]()) { $0[$1.animal, default: 0] += 1 }
-            .max(by: { $0.value < $1.value })?
-            .key
+        let dogs = answers.filter{ $0.animal == Animal.dog }
+        let cats = answers.filter{ $0.animal == Animal.cat }
+        let rabbits = answers.filter{ $0.animal == Animal.rabbit }
+        let turtles = answers.filter{ $0.animal == Animal.turtle }
+        
+        return [dogs,cats,rabbits,turtles]
+            .max(by: { $0.count < $1.count })?
+            .first?
+            .animal
     }
     
     private func updateUI() {
