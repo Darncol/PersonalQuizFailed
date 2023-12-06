@@ -37,4 +37,5 @@ final class ResultViewController: UIViewController {
         emojiLabel.text = "Вы \(animal.rawValue.description)"
         describeLabel.text = animal.definition
     }
+    
 }
